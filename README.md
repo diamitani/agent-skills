@@ -12,6 +12,9 @@ Generated packs live under `dist/<platform>/<slug>/` and are produced by `script
 |------|------|-------------|
 | [project-board-organizer](skills/project-board-organizer/) | project-board-organizer | Audit and clean messy project boards (Asana, ClickUp, Monday, Trello, Notion, Jira): rewrite tasks for an audience, reorganize sections, preview before apply. |
 
+| [social-media-cleanup](skills/social-media-cleanup/) | Social media cleanup | Audit public social content; review findings and remove approved items only. |
+| [typesafe-ai](skills/typesafe-ai/) | typesafe-ai | Build typed AI judgments with evidence, thresholds, and uncertainty handling. |
+
 ## Platforms (`dist/`)
 
 | Platform | Output | Mapping notes |
@@ -38,7 +41,7 @@ Tool-specific lines that differ by target are appended as a **Platform notes** s
 
 ## CI
 
-On push and pull requests, `.github/workflows/validate.yml` runs `validate.py` then `build.py`. On push to `main`, it commits any `dist/` / `index.json` updates back to the branch.
+CI workflow is prepared but not installed: the current GitHub token lacks `workflow` scope and the workflow push failed. Until it can be installed, run `validate.py` and `build.py` locally before pushing.
 
 ## Upstream
 

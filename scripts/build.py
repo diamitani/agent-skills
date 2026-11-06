@@ -97,7 +97,7 @@ def write(path: Path, content: str) -> None:
 def build_grokbot(slug: str, name: str, description: str, body: str) -> None:
     content = (
         f"---\nname: {name}\ndescription: {yaml_quote(description)}\n---\n\n"
-        f"{body.rstrip()}\n\n{connector_note('grokbot')}"
+        f"{body.rstrip()}\n\n{connector_note('grokbot') if slug == 'project-board-organizer' else ''}"
     )
     write(DIST / "grokbot" / slug / "SKILL.md", content)
 
@@ -105,14 +105,14 @@ def build_grokbot(slug: str, name: str, description: str, body: str) -> None:
 def build_claude(slug: str, name: str, description: str, body: str) -> None:
     content = (
         f"---\nname: {kebab(name)}\ndescription: {yaml_quote(description)}\n---\n\n"
-        f"{body.rstrip()}\n\n{connector_note('claude')}"
+        f"{body.rstrip()}\n\n{connector_note('claude') if slug == 'project-board-organizer' else ''}"
     )
     write(DIST / "claude" / slug / "SKILL.md", content)
 
 
 def build_openai(slug: str, name: str, description: str, body: str) -> None:
     agents = (
-        f"# {name}\n\n{description}\n\n{body.rstrip()}\n\n{connector_note('openai')}"
+        f"# {name}\n\n{description}\n\n{body.rstrip()}\n\n{connector_note('openai') if slug == 'project-board-organizer' else ''}"
     )
     write(DIST / "openai" / slug / "AGENTS.md", agents)
     # Custom GPT instructions — hard cap 8000 chars
@@ -120,7 +120,7 @@ def build_openai(slug: str, name: str, description: str, body: str) -> None:
         f"You are running the '{name}' skill.\n\n"
         f"When to use: {description}\n\n"
         f"{body.rstrip()}\n\n"
-        f"{connector_note('openai')}"
+        f"{connector_note('openai') if slug == 'project-board-organizer' else ''}"
     )
     if len(instructions) > 8000:
         instructions = instructions[:7997].rstrip() + "..."
@@ -130,18 +130,18 @@ def build_openai(slug: str, name: str, description: str, body: str) -> None:
 def build_cursor(slug: str, name: str, description: str, body: str) -> None:
     content = (
         f"---\ndescription: {yaml_quote(description)}\nglobs:\nalwaysApply: false\n---\n\n"
-        f"# {name}\n\n{body.rstrip()}\n\n{connector_note('cursor')}"
+        f"# {name}\n\n{body.rstrip()}\n\n{connector_note('cursor') if slug == 'project-board-organizer' else ''}"
     )
     write(DIST / "cursor" / slug / f"{kebab(name)}.mdc", content)
 
 
 def build_codex(slug: str, name: str, description: str, body: str) -> None:
-    content = f"# {name}\n\n{description}\n\n{body.rstrip()}\n\n{connector_note('codex')}"
+    content = f"# {name}\n\n{description}\n\n{body.rstrip()}\n\n{connector_note('codex') if slug == 'project-board-organizer' else ''}"
     write(DIST / "codex" / slug / "AGENTS.md", content)
 
 
 def build_gemini(slug: str, name: str, description: str, body: str) -> None:
-    content = f"# {name}\n\n{description}\n\n{body.rstrip()}\n\n{connector_note('gemini')}"
+    content = f"# {name}\n\n{description}\n\n{body.rstrip()}\n\n{connector_note('gemini') if slug == 'project-board-organizer' else ''}"
     write(DIST / "gemini" / slug / "GEMINI.md", content)
 
 

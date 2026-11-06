@@ -4,5 +4,17 @@
     "name": "project-board-organizer",
     "description": "Use when someone wants a messy project board (Asana, ClickUp, Monday, Trello, Notion, or Jira) audited and cleaned up: tasks rewritten for a specific audience and sections reorganized, with a preview before anything changes.",
     "path": "skills/project-board-organizer/SKILL.md"
+  },
+  {
+    "slug": "social-media-cleanup",
+    "name": "Social media cleanup",
+    "description": "Use when someone wants to clean up their public social media (X, Instagram, TikTok, Facebook, Threads, LinkedIn, Reddit, YouTube): find and remove offensive posts, replies, likes, or comments (hate speech, homophobia, antisemitism, misogyny, racism, slurs) and unfollow porn or adult accounts.",
+    "path": "skills/social-media-cleanup/SKILL.md"
+  },
+  {
+    "slug": "typesafe-ai",
+    "name": "typesafe-ai",
+    "description": "Use when building typed AI judgments with TypeSafe/Jev (routing, ranking, extraction, verification, scrap quality gates) \\u2014 boolean/choice/score primitives via Vercel AI Gateway instead of prompt-and-parse.",
+    "path": "skills/typesafe-ai/SKILL.md"
   }
 ]

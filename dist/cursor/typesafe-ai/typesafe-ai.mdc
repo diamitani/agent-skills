@@ -1,0 +1,55 @@
+---
+description: "Use when building typed AI judgments with TypeSafe/Jev (routing, ranking, extraction, verification, scrap quality gates) \\u2014 boolean/choice/score primitives via Vercel AI Gateway instead of prompt-and-parse."
+globs:
+alwaysApply: false
+---
+
+# typesafe-ai
+
+# Build with TypeSafe (Jev) via Vercel AI Gateway
+
+TypeSafe System One models (flagship: **Jev**) return typed decisions and probabilities, not free text. Code owns the workflow; Jev supplies programmable common sense.
+
+**Preferred transport:** Vercel AI Gateway evaluate endpoint (not OpenRouter; evaluation is not on OpenAI-compatible chat endpoints). Direct `api.typesafe.ai` is legacy.
+
+## Before coding
+1. Prefer atomic questions: **boolean** (yes/no probability), **choice** (one of N), **score** (ordered rubric). Legacy TypeSafe docs call boolean "noul".
+2. Put judgments in `instructions` + `criteria`; put evidence in `state` (string or JSON). Ask independent questions in one request (parallel).
+3. Compose answers in code with thresholds; escalate uncertain cases.
+4. Gateway docs / model id: `typesafe-ai/jev`. Upstream skill reference: https://github.com/typesafe-ai/skills/tree/main/skills/typesafe-ai
+
+## HTTP (Vercel AI Gateway — preferred)
+`POST https://ai-gateway.vercel.sh/v1/evaluate` with `Authorization: Bearer $AI_GATEWAY_API_KEY`, body:
+```json
+{
+  "model": "typesafe-ai/jev",
+  "state": { "...": "..." },
+  "questions": {
+    "qid": {
+      "type": "boolean",
+      "instructions": "...",
+      "criteria": { "true": "...", "false": "..." }
+    }
+  }
+}
+```
+Parse `answers.<id>.probability` (0..1). Also accept `VERCEL_OIDC_TOKEN` if present.
+
+Override with env `JEV_ENDPOINT` / `JEV_MODEL`. Load keys from process environment or the project’s configured secret store (never log values).
+
+## Legacy HTTP (TypeSafe direct)
+`POST https://api.typesafe.ai/v1/systemone` with `TYPESAFE_API_KEY`, model `jev-latest`, question type `noul`, parse `answers.<id>.noul`. Prefer Gateway when available.
+
+## Contact verification pattern
+For directory/scrape quality gates (not full Clay enrichment):
+- Deterministic first: syntax, MX, disposable domains, junk name heuristics, dedupe.
+- Then Jev batch on survivors / borderline rows with booleans such as:
+  - `looks_real_listing` — is this a plausible music-industry contact (venue/radio/blog/playlist/press)?
+  - `name_fits_category` — does `name` fit `category`?
+  - `contact_plausible` — does email/host look organizationally coherent (not random junk)?
+- Keep thresholds in application configuration; sample and validate before a full-scale run.
+- Implement a reusable verification gate and pipeline integration; keep deterministic checks separate from model judgments.
+
+## Credentials
+Server-side only: `AI_GATEWAY_API_KEY` (preferred) or `VERCEL_OIDC_TOKEN`. Never log keys.
+

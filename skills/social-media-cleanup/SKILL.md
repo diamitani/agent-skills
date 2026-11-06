@@ -1,0 +1,33 @@
+---
+name: Social media cleanup
+description: "Use when someone wants to clean up their public social media (X, Instagram, TikTok, Facebook, Threads, LinkedIn, Reddit, YouTube): find and remove offensive posts, replies, likes, or comments (hate speech, homophobia, antisemitism, misogyny, racism, slurs) and unfollow porn or adult accounts."
+---
+# Social media cleanup
+
+Read-only first, remove only after the user confirms.
+
+## 1. Connect and scope
+1. Ask which platforms and what to target: own posts, replies, comments, likes, reposts, or follows, plus categories (hate, slurs, porn/adult, other).
+2. Use the platform's connector if one exists (check connected tools, then SearchPlugins). For X, load the x-api-mcp-guide skill first.
+3. Check which write actions the connector actually supports (delete, unlike, unfollow). Tell the user up front what can be removed automatically and what will need a tap per link.
+
+## 2. Collect
+- Page through everything in scope and save the raw pages to /workspace/<platform>-audit/. Keep the pagination token so a scheduled routine can resume when daily rate limits cut a run short.
+- If the user's own posts can't be read (protected account, no tool), ask them for the platform's data export: X archive, Instagram/Facebook "Download your information", TikTok "Download your data", Google Takeout, Reddit data request. Then parse it locally.
+
+## 3. Classify
+- Flag hate speech (homophobic, transphobic, antisemitic, Islamophobic, racist, misogynistic, ableist slurs), harassment, and porn or adult content.
+- For follows, check the name, handle, bio, and link. Read recent posts only when the bio is ambiguous.
+- Give each item high, medium, or low confidence. Mark quoted critique, reclaimed or in-group usage, and keyword-only matches (BBC News, "neat freak") as low or drop them.
+- Write report.csv with these columns: type, url, text_or_handle, reason, confidence.
+
+## 4. Review with the user
+- Send high- and medium-confidence items as markdown links grouped by type. Offer the low-confidence ones on request.
+- Never delete, unlike, or unfollow before the user explicitly confirms.
+
+## 5. Remove
+- Use the connector's write tools on confirmed items only, check whether each action already went through before retrying, and report what was removed.
+- If no write tools exist, give the links so each removal is one tap. Don't sign into the platform in a browser with the user's password.
+
+## 6. Keep it clean
+- Offer a routine that finishes rate-limited scans and re-checks new likes and follows weekly.
