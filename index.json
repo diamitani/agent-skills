@@ -6,6 +6,12 @@
     "path": "skills/project-board-organizer/SKILL.md"
   },
   {
+    "slug": "prospect-automation",
+    "name": "prospect-automation",
+    "description": "Use when a user wants prospect automation: turn a contact list or signal/ICP brief into sourced companies, decision-makers, business-email candidates and proof-backed SURE/Review/Rejected CSV or Sheet outputs.",
+    "path": "skills/prospect-automation/SKILL.md"
+  },
+  {
     "slug": "social-media-cleanup",
     "name": "Social media cleanup",
     "description": "Use when someone wants to clean up their public social media (X, Instagram, TikTok, Facebook, Threads, LinkedIn, Reddit, YouTube): find and remove offensive posts, replies, likes, or comments (hate speech, homophobia, antisemitism, misogyny, racism, slurs) and unfollow porn or adult accounts.",

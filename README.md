@@ -13,6 +13,7 @@ Generated packs live under `dist/<platform>/<slug>/` and are produced by `script
 | [project-board-organizer](skills/project-board-organizer/) | project-board-organizer | Audit and clean messy project boards (Asana, ClickUp, Monday, Trello, Notion, Jira): rewrite tasks for an audience, reorganize sections, preview before apply. |
 | [social-media-cleanup](skills/social-media-cleanup/) | Social media cleanup | Audit public social content; review findings and remove approved items only. |
 | [typesafe-ai](skills/typesafe-ai/) | typesafe-ai | Build typed AI judgments with evidence, thresholds, and uncertainty handling. |
+| [prospect-automation](skills/prospect-automation/) | prospect-automation | Signal/ICP and uploaded-list research with evidence-backed SURE/Review/Rejected exports; drafts only. |
 
 ## Platforms (`dist/`)
 
