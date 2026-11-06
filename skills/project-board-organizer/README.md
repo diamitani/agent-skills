@@ -1,6 +1,8 @@
 # Project board organizer
 
-Grok Bot skill that audits a messy project board (Asana, ClickUp, Monday, Trello, Notion, or Jira), rewrites tasks for a chosen audience, proposes a clean section structure, and applies approved changes with a preview first.
+Canonical skill that audits a messy project board (Asana, ClickUp, Monday, Trello, Notion, or Jira), rewrites tasks for a chosen audience, proposes a clean section structure, and applies approved changes with a preview first.
+
+Platform packs are generated into `dist/<platform>/project-board-organizer/` by `scripts/build.py`.
 
 ## What's new in v2
 
@@ -9,11 +11,11 @@ Grok Bot skill that audits a messy project board (Asana, ClickUp, Monday, Trello
 - **Preserves original notes** under an `Original notes:` block instead of discarding them
 - **No invented facts** — missing dates/owners stay generic and go under "Questions for the owner"
 - **Partial approvals** — apply names only, skip section changes, exclude specific tasks
-- **Connector-first** — prefers the Grok Bot / Cursor connector; tokens only as fallback
+- **Connector-first** — prefers an installed app connector; tokens only as fallback
 
 ## Relationship to skill-asana-organizer
 
-Upgraded from [diamitani/skill-asana-organizer](https://github.com/diamitani/skill-asana-organizer), which keeps the Claude Code `SKILL.md`, bash connectors, and MCP server. This folder is the Grok Bot skill/template source of truth.
+Upgraded from [diamitani/skill-asana-organizer](https://github.com/diamitani/skill-asana-organizer), which keeps the Claude Code `SKILL.md`, bash connectors, and MCP server.
 
 ## License
 
