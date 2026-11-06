@@ -1,0 +1,23 @@
+name: Validate skills
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate SKILL.md files and refresh index.json
+        run: python3 scripts/validate.py
+      - name: Ensure index.json is committed when present
+        run: |
+          python3 scripts/validate.py
+          git diff --exit-code -- index.json || (
+            echo "index.json is out of date; run python3 scripts/validate.py and commit it" >&2
+            exit 1
+          )
